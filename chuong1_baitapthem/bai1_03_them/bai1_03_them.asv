@@ -22,6 +22,5 @@ function bai1_03_them()
     fprintf('A^-n =   0        1/2^n      -3n/2^(n+1)*n\n');
     fprintf('         0        0          1/2^n\n');
     
-    fprintf('\n5. Transform A^(x+y) in term of x and y, we can prove that \n');
-    fprintf('F(x+y) = F(x)*F(y) \n');
+    fprintf('\n5. Transform A^(x+y) in term of x and y, we can prove that F(x)*F(y) then compare \n');
 end

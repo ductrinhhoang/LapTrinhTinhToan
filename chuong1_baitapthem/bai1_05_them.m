@@ -26,4 +26,5 @@ fprintf('2 cach tinh cho ket qua giong nhau');
 % We can easily show that 
 % The conditions to get [A11 A12; A21 A22]* B[11 B12; B21 B22] = 
 % = [A11B11 + A12B21 A11B12 + A12B22; A21B11 + A22B21 A21B12 + A22B22]
-% is the sum of A'columns equal to the sum of B'rows
+% is Aij has the same order as Bij for every i and j
+% By using block multiplication, we can easily prove that CAB = [lambda a^T*B11 ; 0 C1A1B1]

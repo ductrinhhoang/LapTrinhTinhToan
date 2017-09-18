@@ -1,3 +1,3 @@
 function y = myfun1(x)
- y = sqrt(1 + sin(x).^4);
- 
+ y = sqrt(1 + sin(x).^2);
+ end

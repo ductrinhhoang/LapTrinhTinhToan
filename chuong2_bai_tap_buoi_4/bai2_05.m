@@ -1,6 +1,6 @@
 function bai2_05()
     syms t;
-    fprintf('1. y = e^(-t^2/2), y''+ty = t\n');
+    fprintf('1. y = 1 + e^(-t^2/2), y''+ty = t\n');
     fprintf('   y''+ty = ');
     y = 1 + exp(-t^2/2);
     expand(diff(y) +t*y)

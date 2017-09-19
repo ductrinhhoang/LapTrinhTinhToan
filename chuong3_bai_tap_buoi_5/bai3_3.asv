@@ -1,4 +1,0 @@
-function n = bai_3()
-syms sum e
-while(e > 
-end

@@ -1,11 +1,9 @@
-function n = bai_3()
-e = pi^2/6;
+function pi = bai_3()
 sum = 0;
 n = 1;
-while(e > 10^(-12))
+while(1/n^2 > 10^(-12))
     sum = sum + 1/n^2;
-    e = pi^2/6 - sum;
     n = n + 1;
 end
-
+pi = sqrt(6*sum);
 end

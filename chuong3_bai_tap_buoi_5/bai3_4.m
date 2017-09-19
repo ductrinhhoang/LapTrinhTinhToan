@@ -1,4 +1,4 @@
-function [Pi_est, count] = bai3_04(eps)
+function [Pi_est, count] = bai3_4(eps)
     a = 1;
     b = 1/sqrt(2);
     t = 1/4;

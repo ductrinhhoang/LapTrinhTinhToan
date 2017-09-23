@@ -1,11 +1,11 @@
 function bai3_9(n)
 price = 0;
-message = ';
+message = '';
 
-switch(n)
-    case n < 0
+switch logical(true)
+    case {n < 0}
         message = 'Khong hop le';
-    case (n < 100)
+    case {n < 100}
         price = 500*n;
     case n >= 100 && n <= 200
         price = 700*n;

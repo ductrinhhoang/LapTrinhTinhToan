@@ -1,9 +1,10 @@
-function pi = bai_3()
+function ret = bai3_3(epsi)
 sum = 0;
 n = 1;
-while(1/n^2 > 10^(-12))
+while(1/(2*n +1) > epsi)
     sum = sum + 1/n^2;
     n = n + 1;
 end
-pi = sqrt(6*sum);
+ret = sqrt(6*sum);
+n
 end

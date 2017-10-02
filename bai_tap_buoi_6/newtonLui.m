@@ -1,12 +1,12 @@
-function P = newtonLui(x,y,pos)
-    %pos la vi tri noi suy
+function P = newtonLui(x,y)
     syms t;
     X = bangtyhieu(x,y);
-    P=X(pos,2);
+    n = length(x);
+    P=X(n,2);
     g=1;
-    for i=pos:-1:1
-        g=g*(t-x(i));
-        P=P + g*X(i,pos-i+3);
+    for i=3:n+1
+        g=g*(t-x(n+3-i));
+        P=P + g*X(n-i+2, i);
     end
-    P=expand(P);
+    P = expand(P);
 end

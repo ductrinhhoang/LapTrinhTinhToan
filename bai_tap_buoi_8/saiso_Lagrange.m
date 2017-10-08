@@ -3,9 +3,9 @@ function saiso_Lagrange(x, a, b)
     %a,b la 2 dau mut, khong nhat thiet a<=b
     
     %Sai so(cac moc noi suy thuoc [-1,1]) trong da thuc langrange = M*max|w(t)|*1/(n-1)!
-    %Trong do, M la max cua ham f can xap xi
+    %Trong do, M la max cua dao ham cap n ham f can xap xi
     %w(t) = (t-x1)(t-x2)...(t-xn)
-    %|max(w(t)| la |max(w(t)| trong doan [-1,1]
+    %|max(w(t)| la max|w(t)| trong doan [-1,1]
     %Nhu vay, sai so cua da thuc Lagrange phu thuoc vao |max(w(t)| trong doan [-1 1]
     
     %Trong chuong trinh nay, cong viec chinh cua ta la tinh |max(w(t)| trong doan [-1 1]
@@ -19,5 +19,5 @@ function saiso_Lagrange(x, a, b)
         w = conv(w,q);%w = w*(t-x(i))
     end
     fprintf('Sai so la: %f* M/',maxAbsPoly(w, a , b));
-    fprintf('%d!\n', n-1);
+    fprintf('%d!\n', n);
 end

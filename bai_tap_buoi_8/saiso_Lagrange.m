@@ -18,5 +18,6 @@ function saiso_Lagrange(x, a, b)
         q = [1 -x(i)];%chinh la t - x(i)
         w = conv(w,q);%w = w*(t-x(i))
     end
-    fprintf('Sai so la: M/(n-1)!*%f\n', maxAbsPoly(w, a , b));
+    fprintf('Sai so la: %f* M/',maxAbsPoly(w, a , b));
+    fprintf('%d!\n', n-1);
 end

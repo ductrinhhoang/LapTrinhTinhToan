@@ -1,6 +1,7 @@
 function p = hermite(x, y)
-%x la cac moc noi suy
+%x la cac moc noi suy. VD x = [1; 2; 3]
 %y la ma tran gia tri va dao ham cac cap tai moc noi suy
+%VD y = [-1 -2; 5 20; 55 90]
 
 order= size(y, 2);
 n = size(x, 1);
@@ -16,13 +17,15 @@ for i = 1 : n
 end
 
 for i = 2 : s;
+    k = 1;
     dd(1:s-i+1, i) = diff(dd(1:s-i+2,i-1));
     for j = 1 : s-i+1
         if(z(j+i-1) - z(j) == 0)
-            dd(j,i) = y(ceil(j/n),i)/factorial(i-1);
+            dd(j,i) = y(k,i)/factorial(i-1);
+            k = k+1;
         else
             dd(j,i) = dd(j,i) / (z(j+i-1) - z(j));
-        end;
+        end
     end
 end
 

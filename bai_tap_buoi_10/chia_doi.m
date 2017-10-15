@@ -3,7 +3,7 @@ syms x;
 u = subs(f, a);
 v = subs(f, b);
 if (u*v > 0) 
-    fprintf('Khoang [a, b] khong phai la khoang phan ly nghiem.\n');
+    fprintf('Khoang [a, b] khong ap dung duoc phuong phap chia doi.\n');
 else
     n = 0;
     while(b - a > esp)

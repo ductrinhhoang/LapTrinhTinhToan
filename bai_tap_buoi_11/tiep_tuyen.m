@@ -1,6 +1,6 @@
-function [I,n] = tiep_tuyen(f, a, b, eps)
+function [I,n] = tiep_tuyen(f, a, b, eps, maxCount)
     %Dau vao: f la ham, a<b va [a,b] la khoang phan li nghiem
-    %eps la sai so
+    %eps la sai so, maxCount la so lan lap toi da
     
     %dieu kien hoi tu Furier: f', f'' khong doi dau tren [a,b]
     %chon x0 sao cho f(x0)*f''(x0)>0
@@ -20,21 +20,21 @@ function [I,n] = tiep_tuyen(f, a, b, eps)
     % kiem tra f' va f'' coi chung co doi dau tren [a,b] khong
     if(dfMin*(-dfMax) > 0 && ddfMin*(-ddfMax)>0) 
         m=min(abs(dfMin), abs(dfMax));
-        M=max(abs(dfMin), abs(dfMax));
         %Chon x0 sao cho f(x0)*f''(x0)>0
         if(u*subs(ddF, a) < 0)
-            d = a;
             x0 = b;
         else
-            d = b;
             x0 = a;
         end
         n = 0;
         x1 = x0 - subs(f,x0)/dF(x0);
-        while(eps < abs(subs(f,x0)/m))
+        while(eps < abs(subs(f,x0)/m) && n < maxCount)
             x0 = x1;
             x1 = x0 - subs(f,x0)/dF(x0);
             n = n + 1;
+        end
+        if n == maxCount
+           fprintf('Da dat so lan lap toi da'); 
         end
         I = vpa(x1);
     else

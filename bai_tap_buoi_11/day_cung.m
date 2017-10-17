@@ -1,6 +1,6 @@
-function [I, n] = day_cung(f, a, b, esp) 
+function [I, n] = day_cung(f, a, b, esp, maxCount) 
     %Dau vao: f la ham, a<b va [a,b] la khoang phan li nghiem
-    %esp la sai so
+    %esp la sai so, maxCount la so lan lap toi da
     
     %dieu kien hoi tu: f' khong doi dau tren [a,b]
     %chon x0 sao cho f(x0)*f''(x0)>0
@@ -19,7 +19,7 @@ function [I, n] = day_cung(f, a, b, esp)
     end
     % kiem tra min(f')*max(f') > 0 tren [a, b] thi f' ko doi dau
     % tuong tu cho f''r
-    if(dfMin*(-dfMax) > 0 && ddf) 
+    if(dfMin*(-dfMax) > 0) 
         m=min(abs(dfMin), abs(dfMax));
         M=max(abs(dfMin), abs(dfMax));
         %Chon x0 sao cho f(x0)*f''(x0)<0
@@ -32,10 +32,13 @@ function [I, n] = day_cung(f, a, b, esp)
         end
         x1 = x0 - subs(f, x0)*(x0 - d)/(subs(f, x0) - subs(f, d));
         n = 0;
-        while(abs(x1 - x0) > m*esp/(M - m))
+        while(abs(x1 - x0) > m*esp/(M - m) && n < maxCount)
             x0 = x1;
             x1 = x0 - subs(f, x0)*(x0 - d)/(subs(f, x0) - subs(f, d));
             n = n + 1;
+        end
+        if n == maxCount
+           fprintf('Da dat so lan lap toi da'); 
         end
         I = vpa(x1);
     else

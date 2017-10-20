@@ -6,7 +6,12 @@ function [I,n] = tiep_tuyen(f, a, b, eps, maxCount)
     %dieu kien hoi tu Furier: f', f'' khong doi dau tren [a,b]
     %chon x0 sao cho f(x0)*f''(x0)>0
     syms x;
-    dF = matlabFunction(diff(f, x));
+    if (diff(f,x,2) ~= 0)
+        dF = matlabFunction(diff(f, x));
+    else
+        dF = diff(f,x);
+        dF = @(x) dF;
+    end
     if(diff(f,x,3) ~= 0)
         ddF = matlabFunction(diff(f, x, 2));
     else

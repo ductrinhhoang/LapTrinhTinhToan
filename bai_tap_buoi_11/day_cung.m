@@ -6,7 +6,12 @@ function [I, n] = day_cung(f, a, b, esp, maxCount)
     %dieu kien hoi tu: f' khong doi dau tren [a,b]
     %chon x0 sao cho f(x0)*f''(x0)>0
     syms x;
-    dF = matlabFunction(diff(f, x));
+    if (diff(f,x,2) ~= 0)
+        dF = matlabFunction(diff(f, x));
+    else
+        dF = diff(f,x);
+        dF = @(x) dF;
+    end
     if(diff(f,x,3) ~= 0)
         ddF = matlabFunction(diff(f, x, 2));
     else

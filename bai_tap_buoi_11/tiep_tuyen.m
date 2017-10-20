@@ -7,38 +7,44 @@ function [I,n] = tiep_tuyen(f, a, b, eps, maxCount)
     %chon x0 sao cho f(x0)*f''(x0)>0
     syms x;
     dF = matlabFunction(diff(f, x));
-    ddF = matlabFunction(diff(dF, x));
-    [dxMin dfMin] = fminbnd(dF, a, b);
-    [dxMax dfMax] = fminbnd(@(x) -dF(x), a, b);
-    [ddxMin ddfMin] = fminbnd(ddF, a, b);
-    [ddxMax ddfMax] = fminbnd(@(x) -ddF(x), a, b);
-    u = f(a);
-    v = f(b);
-    if(u*v > 0) 
-            fprintf('[a, b] khong phai la khoang phan ly nghiem\n');
-            return;
+    if(diff(f,x,3) ~= 0)
+        ddF = matlabFunction(diff(f, x, 2));
+    else
+        ddF = diff(f,x,2);
+        ddF = @(x) ddF;
+    end
+    [~, ddfMin] = fminbnd(ddF, a, b);
+    [~, ddfMax] = fminbnd(@(x) -ddF(x), a, b);
+    if(f(a)*f(b) > 0) 
+        fprintf('[a, b] khong phai la khoang phan ly nghiem\n');
+        return;
     end
     % kiem tra f' va f'' coi chung co doi dau tren [a,b] khong
-    if(dfMin*(-dfMax) > 0 && ddfMin*(-ddfMax)>0) 
-        m=min(abs(dfMin), abs(dfMax));
-        %Chon x0 sao cho f(x0)*f''(x0)>0
-        if(u*ddF(a) < 0)
-            x0 = b;
-        else
-            x0 = a;
-        end
-        n = 0;
-        x1 = x0 - f(x0)/dF(x0);
-        while(eps < abs(f(x0)/m) && n < maxCount)
-            x0 = x1;
+    if(ddfMin*(-ddfMax)>0) 
+        %Khi nay, f'' khong doi dau nen max, min f' dat tai 2 dau mut
+        if dF(a)*dF(b)>0
+            m=min(abs(f(a)), abs(f(b)));
+            %Chon x0 sao cho f(x0)*f''(x0)>0
+            if(f(a)*ddF(a) < 0)
+                x0 = b;
+            else
+                x0 = a;
+            end
+            n = 0;
             x1 = x0 - f(x0)/dF(x0);
-            n = n + 1;
+            while(eps < abs(f(x0)/m) && n < maxCount)
+                x0 = x1;
+                x1 = x0 - f(x0)/dF(x0);
+                n = n + 1;
+            end
+            if n == maxCount
+               fprintf('Da dat so lan lap toi da'); 
+            end
+            I = vpa(x1);
+        else
+            fprintf('Dao ham cap 1 doi dau, khong thoa man dieu kien hoi tu\n');
         end
-        if n == maxCount
-           fprintf('Da dat so lan lap toi da'); 
-        end
-        I = vpa(x1);
     else
-        fprintf('Ham khong thoa man dieu kien hoi tu\n');
+        fprintf('Dao ham cap 2 doi dau, khong thoa man dieu kien hoi tu\n');
     end
 end

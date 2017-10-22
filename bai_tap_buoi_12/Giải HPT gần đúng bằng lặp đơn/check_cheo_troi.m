@@ -8,13 +8,13 @@ function norm_index = check_cheo_troi(A)
     A0_sum_col = sum(A0,2);%Vector tong theo cot cua A0
     A0_sum_row = sum(A0,1)';%Vector tong theo hang cua A0
     Diag = diag(A0);%Duong cheo ma tran abs(A)
-    if sum(2*Diag>A0_sum_col) == n
+    if 2*Diag>A0_sum_col
        %Kiem tra xem A co cheo troi cot khong
        fprintf('Ma tran cheo troi hang, ta chon chuan vo cung\n');
        norm_index = inf;
        return;
     end
-    if sum(2*Diag>A0_sum_row) == n
+    if 2*Diag>A0_sum_row
        %Kiem tra xem A co cheo troi cot khong
        fprintf('Ma tran cheo troi cot, ta chon chuan 1\n');
        norm_index = 1;
